@@ -3,7 +3,7 @@ const express = require ('express');
 const app = express();
 
 app.get('/' , function(req,res){
-    res.send("home page");
+    res.send("welcome to shanmukh's basic site");
 
 });
 
