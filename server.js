@@ -6,6 +6,10 @@ app.get('/' , function(req,res){
     res.send("welcome to shanmukh's basic site");
 
 });
+app.get('/resume' , function(req,res){
+    res.send("welcome to shanmukh's resume site");
+
+});
 
 const PORT = process.env.PORT || 3000;
 
