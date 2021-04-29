@@ -7,7 +7,8 @@ app.get('/' , function(req,res){
 
 });
 app.get('/resume' , function(req,res){
-    res.send("welcome to shanmukh's resume site");
+    let indexFilePath= __dirname + "/resume.html";
+    res.sendFile(indexFilePath);
 
 });
 
