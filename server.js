@@ -2,13 +2,15 @@ const express = require ('express');
 
 const app = express();
 
+app.use(express.static(__dirname+"/frontend"));
+
 app.get('/' , function(req,res){
     res.send("welcome to shanmukh's basic site");
 
 });
 app.get('/resume' , function(req,res){
-    let indexFilePath= __dirname + "/resume.html";
-    res.sendFile(indexFilePath);
+    let fullFilePath = __dirname + "/frontend/html/resume.html";
+    res.sendFile(fullFilePath);
 
 });
 
