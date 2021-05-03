@@ -14,6 +14,12 @@ app.get('/resume' , function(req,res){
 
 });
 
+app.get('/google' , function(req,res){
+    let fullFilePath = __dirname + "/frontend/html/google.html";
+    res.sendFile(fullFilePath);
+
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen (PORT, function() {
