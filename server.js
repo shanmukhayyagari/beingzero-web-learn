@@ -26,6 +26,12 @@ app.get('/color' , function(req,res){
 
 });
 
+app.get('/login' , function(req,res){
+    let fullFilePath = __dirname + "/frontend/html/login.html";
+    res.sendFile(fullFilePath);
+
+});
+
 
 const PORT = process.env.PORT || 3000;
 
