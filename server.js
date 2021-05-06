@@ -31,6 +31,11 @@ app.get('/login' , function(req,res){
     res.sendFile(fullFilePath);
 
 });
+app.get('/register' , function(req,res){
+    let fullFilePath = __dirname + "/frontend/html/login.html";
+    res.sendFile(fullFilePath);
+
+});
 
 
 const PORT = process.env.PORT || 3000;
