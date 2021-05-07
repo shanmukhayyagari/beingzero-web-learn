@@ -32,7 +32,7 @@ app.get('/login' , function(req,res){
 
 });
 app.get('/register' , function(req,res){
-    let fullFilePath = __dirname + "/frontend/html/login.html";
+    let fullFilePath = __dirname + "/frontend/html/register.html";
     res.sendFile(fullFilePath);
 
 });
