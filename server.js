@@ -37,6 +37,12 @@ app.get('/register' , function(req,res){
 
 });
 
+app.get('/piechart' , function(req,res){
+    let fullFilePath = __dirname + "/frontend/html/pie.html";
+    res.sendFile(fullFilePath);
+
+});
+
 
 const PORT = process.env.PORT || 3000;
 
