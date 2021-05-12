@@ -43,6 +43,12 @@ app.get('/piechart' , function(req,res){
 
 });
 
+app.get('/todo' , function(req,res){
+    let fullFilePath = __dirname + "/frontend/html/todo.html";
+    res.sendFile(fullFilePath);
+
+});
+
 
 const PORT = process.env.PORT || 3000;
 
