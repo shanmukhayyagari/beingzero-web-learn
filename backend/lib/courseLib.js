@@ -1,7 +1,8 @@
-const coursemodel = require('../model/courseModel');
+const courseModel = require('../model/courseModel');
 
 module.exports.createCourse = function(req,res){
     var course = new courseModel(req.body);
+    console.log(req.body);
     course.save()
         .then(item => {
             res.send("item saved to database");
@@ -12,7 +13,7 @@ module.exports.createCourse = function(req,res){
 }
 
 module.exports.getAllCourses = function(req,res){
-    var query ={};
+    var query ={isDeleted:false};
     courseModel.find(query,function(err,courseobjarr){
         if(err){
             res.json({error:err});
@@ -23,3 +24,17 @@ module.exports.getAllCourses = function(req,res){
 
     })
 };
+
+module.exports.updateCourse = function(req, res){
+    courseModel.updateOne({_id:req.params.courseid}, req.body, (err, itemDetails) => {
+        if (err) console.log('ERROR: ' + err);
+        res.json(itemDetails);
+    });
+}
+
+module.exports.deleteCourse = function(req, res){
+    courseModel.updateOne({_id:req.params.courseid}, req.body, (err, itemDetails) => {
+        if (err) console.log('ERROR: ' + err);
+        res.json(itemDetails);
+    });
+}

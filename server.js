@@ -13,69 +13,15 @@ console.log(process.env.Mongo_atlas_password);
 //const dbOptions = {};
  mongoose.connect(connectionString , {useUnifiedTopology: true, useNewUrlParser: true}).then(()=>console.log("db connected"));
 
-//  courseLib.getallcourses(function(err, courseArray){
-//     console.log(courseArray);
-// })
-
-//  courseLib.createcource({coursename: 'MEAN couese'},function(err, savedobj){
-//     console.log(savedObj);
-// })
-//  mongoose.connection.on('connected' , function(){
-//     console.log("database connected");
-// });
-
-// app.use(express.urlencoded({extended:true}));
-// app.use(express.json());
-// app.use(function(req,res,next){
-//     console.log("Request came");
-//     next();
-// });
-
-// var todos=[];
-
-// app.post('/api/todos',function(req,res){
-
-//     var newTodo=req.body;
-//     todos.push(newTodo);
-//     res.json(newTodo);
-
-// });
-
-// app.get('/api/alltodos',function(req,res){
-
-//     res.json(todos);
-//     userlib.getAllUsers
-// });
-
-// app.get('/api/todos/:todoId',function(req,res){
-
-//     let todoId=req.params.todoId;
-//     // console.log(todoId.value)
-//     let idx=-1;
-
-//     for(let i=0;i<todos.length;i++){
-//         if(todos[i].id==todoId){
-//             idx=i;
-//             break;
-//         }
-//     }
-
-//         if(idx==-1)
-//             res.json({error:'user not found'});
-//         else{
-//             res.json(todos[idx]);
-//             res.json({message:success});
-//         }
-
-// });
-// app.get('/todoapi' , function(req,res){
-//     let fullFilePath = __dirname + "/frontend/html/todoapi.html";
-//     res.sendFile(fullFilePath);
-
-// });
+ 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get("/api/courses",courseLib.getAllCourses);
 app.post("/api/courses",courseLib.createCourse);
+app.put("/api/courses/:courseid",courseLib.updateCourse);
+app.delete("/api/courses/:courseid",courseLib.deleteCourse);
+
 
 app.get('/' , function(req,res){
     res.send("welcome to shanmukh's basic site");
