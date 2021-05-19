@@ -13,9 +13,9 @@ console.log(process.env.Mongo_atlas_password);
 //const dbOptions = {};
  mongoose.connect(connectionString , {useUnifiedTopology: true, useNewUrlParser: true}).then(()=>console.log("db connected"));
 
- courseLib.getallcourses(function(err, courseArray){
-    console.log(courseArray);
-})
+//  courseLib.getallcourses(function(err, courseArray){
+//     console.log(courseArray);
+// })
 
 //  courseLib.createcource({coursename: 'MEAN couese'},function(err, savedobj){
 //     console.log(savedObj);
