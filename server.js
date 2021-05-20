@@ -2,17 +2,15 @@ require('dotenv').config()
 const express = require ('express');
 const mongoose = require('mongoose');
 const courseLib = require('./backend/lib/courseLib');
+const Configure = require('./backend/config/Configure');
+const dbconnect = require('./backend/lib/dbconnect');
 
 
 const app = express();
 
 app.use(express.static(__dirname+"/frontend"));
-var password = process.env.Mongo_atlas_password;
-const connectionString = "mongodb+srv://shanmukhayyagari:"+password+"@cluster0.cbobn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-console.log(process.env.Mongo_atlas_password);
-//const dbOptions = {};
- mongoose.connect(connectionString , {useUnifiedTopology: true, useNewUrlParser: true}).then(()=>console.log("db connected"));
 
+dbconnect.moongoseconnect();
  
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -75,9 +73,13 @@ app.get('/todo' , function(req,res){
 
 });
 
+app.get('/tambola' , function(req,res){
+    let fullFilePath = __dirname + "/frontend/html/tambola.html";
+    res.sendFile(fullFilePath);
 
-const PORT = process.env.PORT || 3000;
+});
 
-app.listen (PORT, function() {
+
+app.listen (Configure.webPort, function() {
     console.log("server started");
 });
