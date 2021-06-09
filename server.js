@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 const courseLib = require('./backend/lib/courseLib');
 const Configure = require('./backend/config/Configure');
 const dbconnect = require('./backend/lib/dbconnect');
+const webrouter = require('./backend/routes/webroutes');
+const users= require('./backend/model/user');
+const { request } = require('express');
 
 
 const app = express();
@@ -21,8 +24,54 @@ app.put("/api/courses/:courseid",courseLib.updateCourse);
 app.delete("/api/courses/:courseid",courseLib.deleteCourse);
 
 
+
+
+app.post('/api/register', function(req,res){
+    users.find({email : req.body.email }, function (err, data) {
+        if(err){ res.status(400).json({msg:"Failed"}); }
+        else {//console.log(data);
+              if(data.length>0)
+              res.status(200).json({msg:"Saved Successful", result : data});
+              else
+              { 
+                
+                var add= new users(req.body);
+                add.save(function(err,record) {
+                if(err){
+                    res.redirect("/register");
+                }
+                else {
+                    res.redirect("/login");
+                   }
+                });
+              }
+             }
+    });
+})
+
+
+
+app.post('/api/login', function(req,res){
+    users.find(req.body , function (err, data) {
+        if(err){ res.status(400).json({msg:"Failed"}); }
+        else if(data.length==1)
+        {
+            res.redirect("/");
+              
+             }
+             else{
+                 res.redirect("/login");
+             }
+    });
+})
+
+
+
+
+
+
 app.get('/' , function(req,res){
-    res.send("welcome to shanmukh's basic site");
+    res.send("welcome ");
 
 });
 app.get('/resume' , function(req,res){
