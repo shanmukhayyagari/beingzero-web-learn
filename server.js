@@ -9,14 +9,42 @@ const users= require('./backend/model/user');
 const { request } = require('express');
 
 
+
+
 const app = express();
+
+
+
+var cookieParser=require("cookie-parser")
+var session = require("express-session");
+const MongoStore = require('connect-mongo');
+
+
+
 
 app.use(express.static(__dirname+"/frontend"));
 
 dbconnect.moongoseconnect();
  
+app.use(session({
+    secret:"thi is secret!!!!",
+    resave:false,
+    saveUninitialized:false,
+    cookie:{
+        maxAge:60*60*1000
+    },
+    store:  MongoStore.create({ mongoUrl:process.env.MONGO_CONNECTION_STRING })
+
+}))
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+
+
+app.use(cookieParser());
+
+
 
 app.get("/api/courses",courseLib.getAllCourses);
 app.post("/api/courses",courseLib.createCourse);
@@ -60,7 +88,10 @@ app.post('/api/login', function(req,res){
               
              }
              else{
+                req.session.userid=data._id
+                req.session.username=data.username
                  res.redirect("/login");
+
              }
     });
 })
@@ -71,7 +102,9 @@ app.post('/api/login', function(req,res){
 
 
 app.get('/' , function(req,res){
+    console.log(req.session);
     res.send("welcome ");
+
 
 });
 app.get('/resume' , function(req,res){
